@@ -29,6 +29,21 @@
                                 </select>
                             </div>
                         </div>
+                        <div class="row mt-3">
+                            <div class="col">
+                                <label for="">Select the desired payment platform:</label>
+                                <div class="form-group">
+                                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                        @foreach ($paymentPlatforms as $paymentPlatform)
+                                            <label class="btn btn-outline-secondary rounded m-2 p-1">
+                                                <input type="radio" name="payment_patform" value="{{ $paymentPlatform->id}}" required>
+                                                <img src="img-thumbnail" src="{{ asset($paymentPlatform->image) }}">
+                                            </label>
+                                        @endforeach
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="text-center mt-3">
                             <button type="submit" class="btn btn-primary btn-lg" id="payButton">Pay</button>
                         </div>

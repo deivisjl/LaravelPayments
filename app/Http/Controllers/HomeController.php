@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Currency;
+use App\Models\PaymentPlatform;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -25,6 +26,9 @@ class HomeController extends Controller
     public function index()
     {
         $currencies = Currency::all();
-        return view('home')->with(['currencies' => $currencies]);
+        $paymentPlatforms = PaymentPlatform::all();
+
+        return view('home')->with(['currencies' => $currencies,
+                                    'paymentPlatforms' => $paymentPlatforms]);
     }
 }
