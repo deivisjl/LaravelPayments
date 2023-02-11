@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Traits\ConsumesExternalServices;
+use Illuminate\Http\Request;
 
 class PayPalService
 {
@@ -38,6 +39,17 @@ class PayPalService
         return "Basic {$credentials}";
     }
 
+    public function handlePayment(Request $request)
+    {
+        $order = $this->createOrder($request->value, $request->currency);
+
+        $orderLinks = collect($order->links);
+
+        $approve = $orderLinks->where('rel','approve')->first();
+
+        return redirect($approve->href);
+    }
+
     public function createOrder($value, $currency)
     {
         return $this->makeRequest(
@@ -64,6 +76,19 @@ class PayPalService
             ],
             [],
             true
+        );
+    }
+
+    public function capturePayment($approvalId)
+    {
+        return $this->makeRequest(
+            'POST',
+            "/v2/checkout/orders/{$approvalId}/capture",
+            [],
+            [],
+            [
+                'Content-Type'=>'application/json'
+            ],
         );
     }
 }
