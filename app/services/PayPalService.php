@@ -64,7 +64,7 @@ class PayPalService
                     0 => [
                         'amount' => [
                             'currenry_code' => strtoupper($currency),
-                            'value' => $value,
+                            'value' => round($value * $factor = $this->resolveFactor($currency)) / $factor,
                         ]
                     ]
                 ],
@@ -109,6 +109,18 @@ class PayPalService
             return redirect()->route('home')->withSuccess(['payment'=>"Thanks, {$name}. We received your {$amount} {$currency} payment"]);
         }
 
-        return redirect()->route('home')->withErrors('We cannot caputre your payment');
+        return redirect()->route('home')->withErrors('We cannot capture your payment');
+    }
+
+    public function resolveFactor($currency)
+    {
+        $zeroDecimalCurrencies = ['JPY'];
+
+        if(in_array(strtoupper($currency), $zeroDecimalCurrencies))
+        {
+            return 1;
+        }
+
+        return 100;
     }
 }
