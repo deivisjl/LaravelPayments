@@ -22,7 +22,13 @@ return [
         'secret' => env('MAILGUN_SECRET'),
         'endpoint' => env('MAILGUN_ENDPOINT', 'api.mailgun.net'),
     ],
-
+    'mercadopago' => [
+        'base_uri' => env('MERCADO_PAGO_BASE_URI'),
+        'key' => env('MERCADO_PAGO_KEY'),
+        'secret' => env('MERCADO_PAGO_SECRET'),
+        'base_currency' => env('MERCADO_PAGO_BASE_CURRENCY'),
+        'class' => App\Services\MercadoPagoService::class,
+    ],
     'paypal' => [
         'base_uri' => env('PAYPAL_BASE_URI'),
         'client_id' => env('PAYPAL_CLIENT_ID'),
