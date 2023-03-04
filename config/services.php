@@ -35,6 +35,15 @@ return [
         'client_secret' => env('PAYPAL_CLIENT_SECRET'),
         'class' => App\Services\PayPalService::class,
     ],
+    'payu' => [
+        'base_uri' => env('PAYU_BASE_URI'),
+        'account_id' => env('PAYU_ACCOUNT_ID'),
+        'merchant_id' => env('PAYU_MERCHANT_ID'),
+        'key' => env('PAYU_KEY'),
+        'secret' => env('PAYU_SECRET'),
+        'base_currency' => env('PAYU_BASE_CURRENCY'),
+        'class' => App\Services\PayuService::class,
+    ],
     'stripe' => [
         'base_uri' => env('STRIPE_BASE_URI'),
         'key' => env('STRIPE_KEY'),
