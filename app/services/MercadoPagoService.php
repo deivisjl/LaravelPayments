@@ -39,7 +39,7 @@ class MercadoPagoService
 
     public function handlePayment(Request $request)
     {
-
+        dd($request->all());
     }
 
     public function handleApproval()
