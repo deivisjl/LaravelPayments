@@ -17,7 +17,8 @@ class SubscriptionController extends Controller
         $this->paymentPlatformResolver = $paymentPlatformResolver;
     }
 
-    public function show(){
+    public function show()
+    {
         $paymentPlatforms = PaymentPlatform::/*where('subscriptions_enabled',true)->*/
                                     get();
 
@@ -27,8 +28,21 @@ class SubscriptionController extends Controller
         ]);
     }
 
-    public function store(){
+    public function store(Request $request)
+    {
+        $rules = [
+            'plan' => ['required','exists:plans,slug'],
+            'payment_platform' => ['required','exists:payment_platforms,id'],
+        ];
 
+        $request->validate($rules);
+
+        $paymentPlatform = $this->paymentPlatformResolver
+        ->resolveService($request->payment_platform);
+
+        session()->put('subscriptionPlatformId',$paymentPlatform);
+
+        return $paymentPlatform->handleSubscription($request);
     }
 
     public function approval(){
