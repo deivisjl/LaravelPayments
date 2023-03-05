@@ -34,8 +34,13 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
+                            <a class="btn btn-outline-primary" href="{{ route('home') }}">Subscribe</a>
+                        </li>
+                        @if(!optional(auth()->user())->hasActiveSubscription())
+                        <li class="nav-item">
                             <a class="nav-link" href="{{ route('home') }}">Home</a>
                         </li>
+                        @endif
                     </ul>
 
                     <!-- Right Side Of Navbar -->
