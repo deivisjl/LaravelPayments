@@ -60,7 +60,7 @@
                                 <p class="border-bottom border-primary rounded">
                                     @if(!optional(auth()->user())->hasActiveSubscription())
                                         Would you like a discount every time?
-                                        <a href="#">Suscribe</a>
+                                        <a href="{{ route('subscribe.show') }}">Suscribe</a>
                                     @else
                                     You get a <span class="font-weight-bold">10%</span> off as part of your subscription (will bea applied in the echeckout)
                                     @endif
