@@ -53,6 +53,10 @@ return [
         'key' => env('STRIPE_KEY'),
         'secret' => env('STRIPE_SECRET'),
         'class' => App\Services\StripeService::class,
+        'plans' => [
+            'monthly' => env("STRIPE_MONTHLY_PLAN"),
+            'yearly' => env("STRIPE_YEARLY_PLAN"),
+        ],
     ],
 
     'postmark' => [
